@@ -27,11 +27,8 @@ public class TaskController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getTask/{id}")
     public TaskDto getTask(@PathVariable("id") Long taskId) {
-        Task task = service.getTaskByID(taskId);
-        if(task != null)
-            return taskMapper.mapToTaskDto(task);
-        else
-            return null;
+        Task task = service.getTaskByID(taskId).get();
+        return taskMapper.mapToTaskDto(task);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask/{id}")
