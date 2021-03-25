@@ -25,7 +25,7 @@ public class EmailScheduler {
                 .mailTo(adminConfig.getAdminMail())
                 .from(adminConfig.getAdminMail())
                 .subject("Database report")
-                .message("Currently in database you got: " + size + "tasks")
+                .message("Currently in database you got: " + size + (size==1?" task":" tasks"))
                 .build()
         );
     }
