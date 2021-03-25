@@ -22,6 +22,7 @@ public class SimpleEmailService {
 
         try {
             SimpleMailMessage mailMessage = createMailMessage(mail);
+            log.info("Message from " + mailMessage.getFrom());
 
             javaMailSender.send(mailMessage);
             log.info("Email has been sent.");
@@ -35,6 +36,7 @@ public class SimpleEmailService {
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
+        mailMessage.setFrom(mail.getFrom());
         Optional.ofNullable(mail.getToCc()).ifPresent(mailMessage::setCc);
 //        mailMessage.setCc(mail.getToCc());
         return mailMessage;
