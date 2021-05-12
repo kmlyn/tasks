@@ -1,9 +1,6 @@
 package com.crud.tasks.trello.mapper;
 
-import com.crud.tasks.domain.TrelloBoard;
-import com.crud.tasks.domain.TrelloBoardDto;
-import com.crud.tasks.domain.TrelloList;
-import com.crud.tasks.domain.TrelloListDto;
+import com.crud.tasks.domain.*;
 import com.crud.tasks.mapper.TrelloMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +43,35 @@ public class TrelloMapperTestSuite {
         assertEquals("1", trelloBoardsDtos.get(0).getId());
         assertEquals("test board", trelloBoardsDtos.get(0).getName());
         assertEquals(1, trelloList.size());
+    }
+
+    @Test
+    public void testMapToCardDto() {
+        //Given
+        TrelloCard card = new TrelloCard("test", "test description", "top", "1");
+
+        //When
+        TrelloCardDto cardDto = trelloMapper.mapToCardDto(card);
+
+        //Then
+        assertEquals(card.getName(), cardDto.getName());
+        assertEquals(card.getDescription(), cardDto.getDescription());
+        assertEquals(card.getPos(), cardDto.getPos());
+        assertEquals(card.getListId(), cardDto.getListId());
+    }
+
+    @Test
+    public void testMapToCard() {
+        //Given
+        TrelloCardDto cardDto = new TrelloCardDto("test", "test description", "top", "1");
+
+        //When
+        TrelloCard card = trelloMapper.mapToCard(cardDto);
+
+        //Then
+        assertEquals(cardDto.getName(), card.getName());
+        assertEquals(cardDto.getDescription(), card.getDescription());
+        assertEquals(cardDto.getPos(), card.getPos());
+        assertEquals(cardDto.getListId(), card.getListId());
     }
 }
